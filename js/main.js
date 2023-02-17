@@ -1,17 +1,23 @@
+const id = document.getElementById('id')
+const password = document.getElementById('password')
+const login = document.getElementById('login')
+let errStack = 0;
 
-const loginForm = document.getElementById("login-form");
-const loginButton = document.getElementById("login-form-submit");
-const loginErrorMsg = document.getElementById("login-error-msg");
+login.addEventListener('click', () => {
+    if (id.value == 'acid') {
+        if (password.value == '0000') {
+            alert('로그인 되었습니다!')
+        }
+        else {
+            alert('아이디와 비밀번호를 다시 한 번 확인해주세요!')
+            errStack ++;
+        }
+    }
+    else {
+        alert('존재하지 않는 계정입니다.')
+    }
 
-loginButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    const username = loginForm.username.value;
-    const password = loginForm.password.value;
-
-    if (username === "user" && password === "1111") {
-        alert("You have successfully logged in.");
-        location.reload();
-    } else {
-        loginErrorMsg.style.opacity = 1;
+    if (errStack >= 5) {
+        alert('비밀번호를 5회 이상 틀리셨습니다. 비밀번호 찾기를 권장드립니다.')
     }
 })

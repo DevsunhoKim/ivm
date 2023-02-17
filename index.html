@@ -5,29 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YBM 재고관리</title>
-    <link rel="stylesheet" href="../imv/css/index.css">
+    <link rel="stylesheet" href="../imv/css/common.css?after">
     <script defer src="../imv/js/main.js"></script>
     
 </head>
 <body>
     <h1>YBM 재고관리</h1>
-    <main id="main-holder">
-      <h2 id="login-header">Login</h2>
-      
-      <div id="login-error-msg-holder">
-        <p id="login-error-msg">Invalid username <span id="error-msg-second-line">and/or password</span></p>
+
+    <div class="main">
+      <h1 class="logo">Acidgram</h1>
+      <div class="container">
+          <input type="text" placeholder="ID" id="id" class="account">
+          <input type="password" placeholder="Password" id="password" class="account">
+          <button id="login" class="account">login</button>
+          <p id="alert" class="account"> </p>
       </div>
-      
-      <form id="login-form">
-        <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Username">
-        <input type="password" name="password" id="password-field" class="login-form-field" placeholder="Password">
-        <input type="submit" value="Login" id="login-form-submit">
-      </form>
-    
-    </main>
-    
-      
-      </main>
+  </div>   
+  <script src=../imv/js/main.js></script>
+  
 
     <div class="main-ctgr">
         <div class="main-ctgr small-ctgr">재고현황</div>
