@@ -1,0 +1,36 @@
+h1 {
+	text-align: center;
+}
+
+table {
+	margin: 20px auto;
+	border-collapse: collapse;
+}
+
+th, td {
+	padding: 10px;
+	border: 1px solid black;
+}
+
+th {
+	background-color: #ccc;
+}
+
+form {
+	margin: 20px auto;
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+label {
+	margin: 10px 0;
+}
+
+input {
+	margin-left: 10px;
+}
+
+
+
