@@ -1,50 +1,50 @@
-// Get the inventory table and form
+// 재고 테이블 및 양식 가져오기
 const inventoryTable = document.querySelector('#inventory tbody');
 const addItemForm = document.querySelector('#add-item-form');
 const exportBtn = document.querySelector('#export-btn');
 
-// Load the inventory from localStorage
+// localStorage에서 인벤토리 로드
 let inventory = JSON.parse(localStorage.getItem('inventory')) || [];
 
-// Render the inventory on the table
+// 테이블에 인벤토리 렌더링
 renderInventory();
 
-// Add a new item to the inventory
+// 인벤토리에 새 항목 추가
 addItemForm.addEventListener('submit', (event) => {
 	event.preventDefault();
 	const itemName = document.querySelector('#item-name').value;
 	const itemQuantity = parseInt(document.querySelector('#item-quantity').value);
 	const itemPrice = parseFloat(document.querySelector('#item-price').value);
 
-	// Add the new item to the inventory
+	// 인벤토리에 새 항목 추가
 	inventory.push({ name: itemName, quantity: itemQuantity, price: itemPrice });
 
-	// Save the updated inventory to localStorage
+	// 업데이트된 인벤토리를 localStorage에 저장합니다
 	localStorage.setItem('inventory', JSON.stringify(inventory));
 
-	// Render the updated inventory on the table
+	// 테이블에서 업데이트된 인벤토리 렌더링
 	renderInventory();
 
-	// Reset the form
+	// 양식 재설정
 	addItemForm.reset();
 });
 
-// Export the inventory to an Excel file
+// 인벤토리를 Excel 파일로 내보내기
 exportBtn.addEventListener('click', () => {
-	// Create a new Excel workbook
+	// 새 Excel 워크북 만들기
 	const workbook = XLSX.utils.book_new();
 
-	// Create a new worksheet
+	// 새 워크시트 생성
 	const worksheet = XLSX.utils.json_to_sheet(inventory);
 
-	// Add the worksheet to the workbook
+	// 워크북에 워크시트 추가
 	XLSX.utils.book_append_sheet(workbook, worksheet, 'Inventory');
 
-	// Export the workbook to an Excel file
+	// 워크북을 Excel 파일로 내보내기
 	XLSX.writeFile(workbook, 'inventory.xlsx');
 });
 
-// Render the inventory on the table
+// 테이블에 인벤토리 렌더링
 function renderInventory() {
 	inventoryTable.innerHTML = '';
 	inventory.forEach((item) => {
@@ -57,3 +57,29 @@ function renderInventory() {
 		inventoryTable.appendChild(row);
 	});
 }
+
+// 테이블에 인벤토리 렌더링
+function renderInventory() {
+	inventoryTable.innerHTML = '';
+	inventory.forEach((item, index) => {
+	  const row = document.createElement('tr');
+	  row.innerHTML = `
+		<td>${item.name}</td>
+		<td>${item.quantity}</td>
+		<td>$${item.price.toFixed(2)}</td>
+		<td><button class="delete-btn" data-index="${index}">Delete</button></td>
+	  `;
+	  inventoryTable.appendChild(row);
+	});
+	
+	// 삭제 단추에 이벤트 수신기 추가
+	const deleteButtons = document.querySelectorAll('.delete-btn');
+	deleteButtons.forEach((button) => {
+	  button.addEventListener('click', (event) => {
+		const index = event.target.dataset.index;
+		inventory.splice(index, 1);
+		localStorage.setItem('inventory', JSON.stringify(inventory));
+		renderInventory();
+	  });
+	});
+  }

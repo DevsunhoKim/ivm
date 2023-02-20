@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Inventory Management</title>
+	<title>YBM 재고 관리</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
+	
 </head>
 <body>
-	<h1>Inventory Management System</h1>
+	<h1>YBM 재고 관리</h1>
+
 	<table id="inventory">
 		<thead>
 			<tr>
-				<th>Item Name</th>
-				<th>Quantity</th>
-				<th>Price</th>
+				<th>아이템 종류</th>
+				<th>수량</th>
+				<th>가격</th>
+				<th>삭제</th>
 			</tr>
 		</thead>
 		<tbody>
-			<!-- Inventory data will be added dynamically with JavaScript -->
+			<!-- 인벤토리 데이터는 JavaScript를 사용하여 동적으로 추가됩니다 -->
 		</tbody>
 	</table>
 	<form id="add-item-form">
@@ -30,6 +33,6 @@
 	</form>
 	<script src="script.js"></script>
     <script src="https://unpkg.com/xlsx/dist/xlsx.full.min"></script>
-
+    <script src="login.js"></script>
 </body>
 </html>
