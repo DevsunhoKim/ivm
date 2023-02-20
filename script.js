@@ -13,8 +13,13 @@ renderInventory();
 addItemForm.addEventListener('submit', (event) => {
 	event.preventDefault();
 	const itemName = document.querySelector('#item-name').value;
-	const itemQuantity = parseInt(document.querySelector('#item-quantity').value);
+	let itemQuantity = parseInt(document.querySelector('#item-quantity').value);
 	const itemPrice = parseFloat(document.querySelector('#item-price').value);
+
+	if (isNaN(itemQuantity) || itemQuantity < 1) {
+        alert("수량은 1 이상의 수를 입력해야 합니다.");
+        return;
+	}
 
 	// 인벤토리에 새 항목 추가
 	inventory.push({ name: itemName, quantity: itemQuantity, price: itemPrice });
@@ -71,16 +76,15 @@ function renderInventory() {
 		<td>${item.name}</td>
 		<td>${item.quantity}</td>
 		<td>$${item.price.toFixed(2)}</td>
-		<td><button class="delete-btn" data-index="${index}">Delete</button></td>
+		<td><button class="delete-btn">삭제</button></td>
 	  `;
 	  inventoryTable.appendChild(row);
 	});
-	
-	// 삭제 단추에 이벤트 수신기 추가
+  
+	// 삭제 버튼에 이벤트 리스너 추가
 	const deleteButtons = document.querySelectorAll('.delete-btn');
-	deleteButtons.forEach((button) => {
-	  button.addEventListener('click', (event) => {
-		const index = event.target.dataset.index;
+	deleteButtons.forEach((button, index) => {
+	  button.addEventListener('click', () => {
 		inventory.splice(index, 1);
 		localStorage.setItem('inventory', JSON.stringify(inventory));
 		renderInventory();
