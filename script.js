@@ -29,7 +29,6 @@ addItemForm.addEventListener('submit', (event) => {
 	addItemForm.reset();
 });
 
-// 인벤토리를 Excel 파일로 내보내기
 exportBtn.addEventListener('click', () => {
 	// 새 Excel 워크북 만들기
 	const workbook = XLSX.utils.book_new();
@@ -40,8 +39,13 @@ exportBtn.addEventListener('click', () => {
 	// 워크북에 워크시트 추가
 	XLSX.utils.book_append_sheet(workbook, worksheet, 'Inventory');
 
+	// 현재 날짜를 이용하여 파일명 생성
+	const date = new Date();
+	const dateString = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+	const fileName = `inventory_${dateString}.xlsx`;
+
 	// 워크북을 Excel 파일로 내보내기
-	XLSX.writeFile(workbook, 'inventory.xlsx');
+	XLSX.writeFile(workbook, fileName);
 });
 
 // 테이블에 인벤토리 렌더링
