@@ -24,6 +24,17 @@ addItemForm.addEventListener('submit', (event) => {
 	// 인벤토리에 새 항목 추가
 	inventory.push({ name: itemName, quantity: itemQuantity, price: itemPrice });
 
+	// 중복 아이템 체크
+	for (let i = 0; i < inventory.length; i++) {
+		if (inventory[i].name === itemName) {
+			inventory[i].quantity += itemQuantity;
+			localStorage.setItem('inventory', JSON.stringify(inventory));
+			renderInventory();
+			addItemForm.reset();
+			return;
+		}
+	}
+
 	// 업데이트된 인벤토리를 localStorage에 저장합니다
 	localStorage.setItem('inventory', JSON.stringify(inventory));
 
@@ -53,19 +64,6 @@ exportBtn.addEventListener('click', () => {
 	XLSX.writeFile(workbook, fileName);
 });
 
-// 테이블에 인벤토리 렌더링
-function renderInventory() {
-	inventoryTable.innerHTML = '';
-	inventory.forEach((item) => {
-		const row = document.createElement('tr');
-		row.innerHTML = `
-			<td>${item.name}</td>
-			<td>${item.quantity}</td>
-			<td>$${item.price.toFixed(2)}</td>
-		`;
-		inventoryTable.appendChild(row);
-	});
-}
 
 // 테이블에 인벤토리 렌더링
 function renderInventory() {
@@ -90,4 +88,24 @@ function renderInventory() {
 		renderInventory();
 	  });
 	});
+
+	
+	const removeButtons = document.querySelectorAll('.remove-btn');
+    removeButtons.forEach((button, index) => {
+        button.addEventListener('click', () => {
+            const quantityToRemove = parseInt(document.querySelector(`#quantity-to-remove-${index}`).value);
+            if (quantityToRemove > 0) {
+                inventory[index].quantity -= quantityToRemove;
+                localStorage.setItem('inventory', JSON.stringify(inventory));
+                renderInventory();
+            }
+        });
+    });
+
+
+
+
+
+
   }
+
