@@ -17,14 +17,20 @@ function insertInventoryData() {
     const priceCell = row.insertCell(2);
     const inCell = row.insertCell(3);
     const outCell = row.insertCell(4);
-    const deleteCell = row.insertCell(5);
+    const inHistoryCell = row.insertCell(5); // 새로운 열: 입고 내역
+    const outHistoryCell = row.insertCell(6); // 새로운 열: 출고 내역
+    const deleteCell = row.insertCell(7);
 
     itemCell.innerHTML = inventoryData[i].name;
     quantityCell.innerHTML = inventoryData[i].quantity;
     priceCell.innerHTML = inventoryData[i].price;
     inCell.innerHTML = '<button class="in-btn">In</button>';
     outCell.innerHTML = '<button class="out-btn">Out</button>';
+    inHistoryCell.innerHTML = '<button class="in-history-btn">In History</button>'; // 새로운 버튼: 입고 내역 버튼
+    outHistoryCell.innerHTML = '<button class="out-history-btn">Out History</button>'; // 새로운 버튼: 출고 내역 버튼
     deleteCell.innerHTML = '<button class="delete-btn">Delete</button>';
+
+    
   }
 }
 
@@ -102,3 +108,11 @@ function increaseInventoryData(event) {
   });
   exportBtn.addEventListener('click', exportToExcel);
   
+// 입고 내역 버튼 클릭 시 이벤트 핸들러
+function showInHistory(event) {
+  const row = event.target.parentNode.parentNode;
+  const rowIndex = row.rowIndex - 1;
+  const itemData = inventoryData[rowIndex];
+  alert(`입고 내역: ${itemData.inHistory.join(', ')}`);
+}
+
