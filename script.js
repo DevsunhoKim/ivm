@@ -1,111 +1,104 @@
-// 재고 테이블 및 양식 가져오기
-const inventoryTable = document.querySelector('#inventory tbody');
-const addItemForm = document.querySelector('#add-item-form');
-const exportBtn = document.querySelector('#export-btn');
+// 인벤토리 데이터
+const inventoryData = [];
 
-// localStorage에서 인벤토리 로드
-let inventory = JSON.parse(localStorage.getItem('inventory')) || [];
+// HTML 요소 참조
+const addFormItem = document.getElementById('add-item-form');
+const inventoryTable = document.getElementById('inventory');
+const exportBtn = document.getElementById('export-btn');
 
-// 테이블에 인벤토리 렌더링
-renderInventory();
+// 데이터 삽입 함수
+function insertInventoryData() {
+  const tbody = inventoryTable.getElementsByTagName('tbody')[0];
+  tbody.innerHTML = '';
+  for (let i = 0; i < inventoryData.length; i++) {
+    const row = tbody.insertRow(i);
+    const itemCell = row.insertCell(0);
+    const quantityCell = row.insertCell(1);
+    const priceCell = row.insertCell(2);
+    const inCell = row.insertCell(3);
+    const outCell = row.insertCell(4);
+    const deleteCell = row.insertCell(5);
 
-// 인벤토리에 새 항목 추가
-addItemForm.addEventListener('submit', (event) => {
-	event.preventDefault();
-	const itemName = document.querySelector('#item-name').value;
-	let itemQuantity = parseInt(document.querySelector('#item-quantity').value);
-	const itemPrice = parseFloat(document.querySelector('#item-price').value);
-
-	if (isNaN(itemQuantity) || itemQuantity < 1) {
-        alert("수량은 1 이상의 수를 입력해야 합니다.");
-        return;
-	}
-
-	// 인벤토리에 새 항목 추가
-	inventory.push({ name: itemName, quantity: itemQuantity, price: itemPrice });
-
-	// 중복 아이템 체크
-	for (let i = 0; i < inventory.length; i++) {
-		if (inventory[i].name === itemName) {
-			inventory[i].quantity += itemQuantity;
-			localStorage.setItem('inventory', JSON.stringify(inventory));
-			renderInventory();
-			addItemForm.reset();
-			return;
-		}
-	}
-
-	// 업데이트된 인벤토리를 localStorage에 저장합니다
-	localStorage.setItem('inventory', JSON.stringify(inventory));
-
-	// 테이블에서 업데이트된 인벤토리 렌더링
-	renderInventory();
-
-	// 양식 재설정
-	addItemForm.reset();
-});
-
-exportBtn.addEventListener('click', () => {
-	// 새 Excel 워크북 만들기
-	const workbook = XLSX.utils.book_new();
-
-	// 새 워크시트 생성
-	const worksheet = XLSX.utils.json_to_sheet(inventory);
-
-	// 워크북에 워크시트 추가
-	XLSX.utils.book_append_sheet(workbook, worksheet, 'Inventory');
-
-	// 현재 날짜를 이용하여 파일명 생성
-	const date = new Date();
-	const dateString = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-	const fileName = `inventory_${dateString}.xlsx`;
-
-	// 워크북을 Excel 파일로 내보내기
-	XLSX.writeFile(workbook, fileName);
-});
-
-
-// 테이블에 인벤토리 렌더링
-function renderInventory() {
-	inventoryTable.innerHTML = '';
-	inventory.forEach((item, index) => {
-	  const row = document.createElement('tr');
-	  row.innerHTML = `
-		<td>${item.name}</td>
-		<td>${item.quantity}</td>
-		<td>$${item.price.toFixed(2)}</td>
-		<td><button class="delete-btn">삭제</button></td>
-	  `;
-	  inventoryTable.appendChild(row);
-	});
-  
-	// 삭제 버튼에 이벤트 리스너 추가
-	const deleteButtons = document.querySelectorAll('.delete-btn');
-	deleteButtons.forEach((button, index) => {
-	  button.addEventListener('click', () => {
-		inventory.splice(index, 1);
-		localStorage.setItem('inventory', JSON.stringify(inventory));
-		renderInventory();
-	  });
-	});
-
-	
-	const removeButtons = document.querySelectorAll('.remove-btn');
-    removeButtons.forEach((button, index) => {
-        button.addEventListener('click', () => {
-            const quantityToRemove = parseInt(document.querySelector(`#quantity-to-remove-${index}`).value);
-            if (quantityToRemove > 0) {
-                inventory[index].quantity -= quantityToRemove;
-                localStorage.setItem('inventory', JSON.stringify(inventory));
-                renderInventory();
-            }
-        });
-    });
-
-
-
-
-
-
+    itemCell.innerHTML = inventoryData[i].name;
+    quantityCell.innerHTML = inventoryData[i].quantity;
+    priceCell.innerHTML = inventoryData[i].price;
+    inCell.innerHTML = '<button class="in-btn">In</button>';
+    outCell.innerHTML = '<button class="out-btn">Out</button>';
+    deleteCell.innerHTML = '<button class="delete-btn">Delete</button>';
   }
+}
 
+// 데이터 추가 함수
+function addInventoryData(event) {
+  event.preventDefault();
+  const itemName = document.getElementById('item-name').value;
+  const itemQuantity = parseInt(document.getElementById('item-quantity').value);
+  const itemPrice = parseInt(document.getElementById('item-price').value);
+  const itemData = { name: itemName, quantity: itemQuantity, price: itemPrice };
+  inventoryData.push(itemData);
+  insertInventoryData();
+  addFormItem.reset();
+}
+
+// 데이터 삭제 함수
+function deleteInventoryData(event) {
+  const row = event.target.parentNode.parentNode;
+  const rowIndex = row.rowIndex - 1;
+  inventoryData.splice(rowIndex, 1);
+  insertInventoryData();
+}
+
+// Excel 내보내기 함수
+function exportToExcel() {
+  const workbook = XLSX.utils.book_new();
+  const worksheet = XLSX.utils.table_to_sheet(inventoryTable);
+  XLSX.utils.book_append_sheet(workbook, worksheet, 'Inventory');
+  XLSX.writeFile(workbook, 'inventory.xlsx');
+}
+
+// 이벤트 처리
+addFormItem.addEventListener('submit', addInventoryData);
+inventoryTable.addEventListener('click', function (event) {
+  if (event.target.className === 'delete-btn') {
+    deleteInventoryData(event);
+  }
+});
+exportBtn.addEventListener('click', exportToExcel);
+
+// 데이터 증가 함수
+function increaseInventoryData(event) {
+	const row = event.target.parentNode.parentNode;
+	const rowIndex = row.rowIndex - 1;
+	const quantityInput = prompt('Enter quantity to increase:', '1');
+	const quantity = parseInt(quantityInput);
+	if (!isNaN(quantity)) {
+	  inventoryData[rowIndex].quantity += quantity;
+	  insertInventoryData();
+	}
+  }
+  
+  // 데이터 감소 함수
+  function decreaseInventoryData(event) {
+	const row = event.target.parentNode.parentNode;
+	const rowIndex = row.rowIndex - 1;
+	const quantityInput = prompt('Enter quantity to decrease:', '1');
+	const quantity = parseInt(quantityInput);
+	if (!isNaN(quantity)) {
+	  inventoryData[rowIndex].quantity -= quantity;
+	  insertInventoryData();
+	}
+  }
+  
+  // 이벤트 처리
+  addFormItem.addEventListener('submit', addInventoryData);
+  inventoryTable.addEventListener('click', function (event) {
+	if (event.target.className === 'delete-btn') {
+	  deleteInventoryData(event);
+	} else if (event.target.className === 'in-btn') {
+	  increaseInventoryData(event);
+	} else if (event.target.className === 'out-btn') {
+	  decreaseInventoryData(event);
+	}
+  });
+  exportBtn.addEventListener('click', exportToExcel);
+  
