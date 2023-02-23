@@ -59,7 +59,12 @@ function exportToExcel() {
   const workbook = XLSX.utils.book_new();
   const worksheet = XLSX.utils.table_to_sheet(inventoryTable);
   XLSX.utils.book_append_sheet(workbook, worksheet, 'Inventory');
-  XLSX.writeFile(workbook, 'inventory.xlsx');
+  
+  // 현재 날짜 문자열 생성
+  const currentDate = new Date().toISOString().slice(0, 10);
+  
+  // 파일 이름에 현재 날짜 추가
+  XLSX.writeFile(workbook, `inventory_${currentDate}.xlsx`);
 }
 
 // 이벤트 처리
