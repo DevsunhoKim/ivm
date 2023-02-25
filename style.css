@@ -1,40 +1,57 @@
 h1 {
 	text-align: center;
 	font-size: 50px;
-	font-weight: 500;
-
-}
-
-table {
+	font-weight: 700;
+	color: #1E90FF;
+  }
+  
+  table {
 	margin: 20px auto;
 	border-collapse: collapse;
-}
-
-th, td {
+  }
+  
+  th,
+  td {
 	padding: 10px;
 	border: 2px solid black;
 	text-align: center;
-}
-
-th {
+  }
+  
+  th {
 	background-color: #ccc;
-}
-
-form {
+  }
+  
+  form {
 	margin: 20px auto;
 	width: 50%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-}
-
-label {
+  }
+  
+  label {
 	margin: 20px 0;
-}
-
-input {
+	
+  }
+  
+  input {
 	margin-left: 10px;
-}
-
-
-
+	border: 2px solid #1E90FF;
+	border-radius: 5px;
+	padding: 5px;
+  }
+  
+  button {
+	background-color: #0F52BA;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	padding: 10px;
+	cursor: pointer;
+	
+  }
+  
+  button:hover {
+	background-color: #4169E1;
+  }
+  
