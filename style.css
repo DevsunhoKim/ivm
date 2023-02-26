@@ -30,11 +30,12 @@ h1 {
   }
   
   label {
-	margin: 20px 0;
+	margin: 10px 0;
 	
   }
   
   input {
+	
 	margin-left: 10px;
 	border: 2px solid #1E90FF;
 	border-radius: 5px;
@@ -42,6 +43,7 @@ h1 {
   }
   
   button {
+	margin-top: 10px;
 	background-color: #0F52BA;
 	color: white;
 	border: none;
