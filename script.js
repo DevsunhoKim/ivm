@@ -121,3 +121,14 @@ function showInHistory(event) {
   alert(`입고 내역: ${itemData.inHistory.join(', ')}`);
 }
 
+// add this code to toggle between light and dark themes
+const toggleDarkMode = () => {
+  document.body.classList.toggle('dark-mode');
+}
+
+// add this code to create the button and attach the event listener
+const darkModeBtn = document.createElement('button');
+darkModeBtn.classList.add('dark-mode-btn');
+darkModeBtn.textContent = 'Dark,Light';
+darkModeBtn.addEventListener('click', toggleDarkMode);
+document.body.appendChild(darkModeBtn);

@@ -18,7 +18,7 @@ h1 {
   }
   
   th {
-	background-color: #ccc;
+	background-color: darkgray;
   }
   
   form {
@@ -55,5 +55,24 @@ h1 {
   
   button:hover {
 	background-color: #4169E1;
+  }
+  
+/* add this code to toggle between light and dark themes */
+body.dark-mode {
+	background-color: #222;
+	color: #fff;
+  }
+  
+  /* add this code to style the button */
+  .dark-mode-btn {
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	background-color: #0F52BA;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	padding: 10px;
+	cursor: pointer;
   }
   
