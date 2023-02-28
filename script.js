@@ -6,6 +6,7 @@ const addFormItem = document.getElementById('add-item-form');
 const inventoryTable = document.getElementById('inventory');
 const exportBtn = document.getElementById('export-btn');
 
+
 // 데이터 삽입 함수
 function insertInventoryData() {
   const tbody = inventoryTable.getElementsByTagName('tbody')[0];
@@ -132,3 +133,14 @@ darkModeBtn.classList.add('dark-mode-btn');
 darkModeBtn.textContent = 'Dark,Light';
 darkModeBtn.addEventListener('click', toggleDarkMode);
 document.body.appendChild(darkModeBtn);
+
+
+function searchInventoryData(event) {
+  event.preventDefault();
+  const searchInput = document.getElementById('search-input').value;
+  // 검색어를 처리하는 코드 작성
+}
+
+
+const searchForm = document.getElementById('search-form');
+searchForm.addEventListener('submit', searchInventoryData);
