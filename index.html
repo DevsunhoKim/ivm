@@ -4,17 +4,28 @@
 	<title>YBM 재고 관리</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link rel="icon" href="./favicon.png">
-	
 </head>
 <body>
 	<h1>YBM 재고 관리</h1>
-    
-	<form id="search-form">
-		<input type="text" id="search-input" placeholder="검색어를 입력하세요...">
-		<button type="submit">검색</button>
-	  </form>
+   
+	<div id="login-form">
+		<form>
+		  <label for="username">Username:</label>
+		  <input type="text" id="username" name="username">
+		  <br>
+		  <label for="password">Password:</label>
+		  <input type="password" id="password" name="password">
+		  <br>
+		  <button id="login-button">Log In</button>
+		</form>
+	  </div>
+	  <div id="logout-form" style="display: none;">
+		<button id="logout-button">Log Out</button>
+	  </div>
 	  
 
+	<div id="error-message" class="error-message" style="display: none;"></div>
+	  
 	<table id="inventory">
 		<thead>
 			<tr>
@@ -42,8 +53,6 @@
 		<button type="submit">아이템 추가</button>
 		<button type="button" id="export-btn">Excel</button>
 	</form>
-
-	
 
 	<script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
 	<script src="script.js"></script>

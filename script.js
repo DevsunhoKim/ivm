@@ -135,12 +135,48 @@ darkModeBtn.addEventListener('click', toggleDarkMode);
 document.body.appendChild(darkModeBtn);
 
 
-function searchInventoryData(event) {
+// get the login and logout forms
+const loginForm = document.getElementById('login-form');
+const logoutForm = document.getElementById('logout-form');
+
+// get the login and logout buttons
+const loginButton = document.getElementById('login-button');
+const logoutButton = document.getElementById('logout-button');
+
+// add a click event listener to the login button
+loginButton.addEventListener('click', (event) => {
   event.preventDefault();
-  const searchInput = document.getElementById('search-input').value;
-  // 검색어를 처리하는 코드 작성
-}
 
+  // get the username and password fields
+  const usernameField = document.getElementById('username');
+  const passwordField = document.getElementById('password');
 
-const searchForm = document.getElementById('search-form');
-searchForm.addEventListener('submit', searchInventoryData);
+  // get the username and password values
+  const username = usernameField.value;
+  const password = passwordField.value;
+
+  // send a request to the server to check the login credentials
+  // assuming the server returns a success response with a status code of 200
+  // we will hide the login form and show the logout form
+  if (username === 'admin' && password === 'password') {
+    loginForm.style.display = 'none';
+    logoutForm.style.display = 'block';
+  } else {
+    alert('Invalid username or password.');
+  }
+});
+
+// add a click event listener to the logout button
+logoutButton.addEventListener('click', (event) => {
+  event.preventDefault();
+
+  // hide the logout form and show the login form
+  logoutForm.style.display = 'none';
+  loginForm.style.display = 'block';
+
+  // reset the username and password fields
+  const usernameField = document.getElementById('username');
+  const passwordField = document.getElementById('password');
+  usernameField.value = '';
+  passwordField.value = '';
+});

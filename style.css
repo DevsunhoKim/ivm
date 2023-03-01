@@ -57,14 +57,14 @@ h1 {
 	background-color: #4169E1;
   }
   
-/* add this code to toggle between light and dark themes */
+/* 다크모드 테마 */
 body.dark-mode {
 	background-color: #222;
 	color: #fff;
 	
   }
   
-  /* add this code to style the button */
+  /* 다크모드 버튼 */
   .dark-mode-btn {
 	position: fixed;
 	top: 20px;
