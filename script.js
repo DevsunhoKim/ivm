@@ -122,22 +122,10 @@ function showInHistory(event) {
   alert(`입고 내역: ${itemData.inHistory.join(', ')}`);
 }
 
-// add this code to toggle between light and dark themes
-const toggleDarkMode = () => {
-  document.body.classList.toggle('dark-mode');
-}
-
-// add this code to create the button and attach the event listener
-const darkModeBtn = document.createElement('button');
-darkModeBtn.classList.add('dark-mode-btn');
-darkModeBtn.textContent = 'Dark,Light';
-darkModeBtn.addEventListener('click', toggleDarkMode);
-document.body.appendChild(darkModeBtn);
-
-
-// get the login and logout forms
+// JavaScript
 const loginForm = document.getElementById('login-form');
 const logoutForm = document.getElementById('logout-form');
+const dataTable = document.getElementById('inventory');
 
 // get the login and logout buttons
 const loginButton = document.getElementById('login-button');
@@ -157,10 +145,12 @@ loginButton.addEventListener('click', (event) => {
 
   // send a request to the server to check the login credentials
   // assuming the server returns a success response with a status code of 200
-  // we will hide the login form and show the logout form
+  // we will hide the login form and show the logout form and the data table
   if (username === 'admin' && password === 'password') {
+    sessionStorage.setItem('loggedIn', true); // save login status in session storage
     loginForm.style.display = 'none';
     logoutForm.style.display = 'block';
+    dataTable.style.display = 'block';
   } else {
     alert('Invalid username or password.');
   }
@@ -170,8 +160,10 @@ loginButton.addEventListener('click', (event) => {
 logoutButton.addEventListener('click', (event) => {
   event.preventDefault();
 
-  // hide the logout form and show the login form
+  // hide the logout form and the data table, and show the login form
+  sessionStorage.removeItem('loggedIn'); // remove login status from session storage
   logoutForm.style.display = 'none';
+  dataTable.style.display = 'none';
   loginForm.style.display = 'block';
 
   // reset the username and password fields
@@ -179,4 +171,24 @@ logoutButton.addEventListener('click', (event) => {
   const passwordField = document.getElementById('password');
   usernameField.value = '';
   passwordField.value = '';
+});
+
+// check login status when the page loads
+window.addEventListener('load', (event) => {
+  const loggedIn = sessionStorage.getItem('loggedIn');
+  if (loggedIn === 'true') {
+    logoutForm.style.display = 'block';
+    dataTable.style.display = 'block';
+  } else {
+    loginForm.style.display = 'block';
+  }
+});
+
+// add a click event listener to the data table
+dataTable.addEventListener('click', (event) => {
+  const loggedIn = sessionStorage.getItem('loggedIn');
+  if (loggedIn !== 'true') { // check login status
+    alert('Please log in to modify the data.'); // show alert if not logged in
+    event.preventDefault(); // prevent default behavior of the click event
+  }
 });
