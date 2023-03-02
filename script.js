@@ -121,11 +121,10 @@ function showInHistory(event) {
   const itemData = inventoryData[rowIndex];
   alert(`입고 내역: ${itemData.inHistory.join(', ')}`);
 }
-
 // JavaScript
 const loginForm = document.getElementById('login-form');
 const logoutForm = document.getElementById('logout-form');
-const dataTable = document.getElementById('inventory');
+const dataTable = document.getElementById('data-table');
 
 // get the login and logout buttons
 const loginButton = document.getElementById('login-button');
@@ -151,6 +150,7 @@ loginButton.addEventListener('click', (event) => {
     loginForm.style.display = 'none';
     logoutForm.style.display = 'block';
     dataTable.style.display = 'block';
+    dataTable.style.margin = "0 auto"; // center align the table
   } else {
     alert('Invalid username or password.');
   }
@@ -179,6 +179,7 @@ window.addEventListener('load', (event) => {
   if (loggedIn === 'true') {
     logoutForm.style.display = 'block';
     dataTable.style.display = 'block';
+    dataTable.style.margin = "0 auto"; // center align the table
   } else {
     loginForm.style.display = 'block';
   }
@@ -191,4 +192,12 @@ dataTable.addEventListener('click', (event) => {
     alert('Please log in to modify the data.'); // show alert if not logged in
     event.preventDefault(); // prevent default behavior of the click event
   }
+});
+
+// add a click event listener to the login form, to reset the fields on each login attempt
+loginForm.addEventListener('click', (event) => {
+  const usernameField = document.getElementById('username');
+  const passwordField = document.getElementById('password');
+  usernameField.value = '';
+  passwordField.value = '';
 });
