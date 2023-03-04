@@ -121,59 +121,59 @@ function showInHistory(event) {
   const itemData = inventoryData[rowIndex];
   alert(`입고 내역: ${itemData.inHistory.join(', ')}`);
 }
-// JavaScript
-const loginForm = document.getElementById('login-form');
-const logoutForm = document.getElementById('logout-form');
-const dataTable = document.getElementById('data-table');
 
-// get the login and logout buttons
+const loginForm = document.getElementById('login-form'); // 로그인 폼 가져오기
+const logoutForm = document.getElementById('logout-form'); // 로그아웃 폼 가져오기
+const dataTable = document.getElementById('data-table'); // 데이터 테이블 가져오기
+
+// 로그인과 로그아웃 버튼 가져오기
 const loginButton = document.getElementById('login-button');
 const logoutButton = document.getElementById('logout-button');
 
-// add a click event listener to the login button
+// 로그인 버튼에 클릭 이벤트 리스너 추가
 loginButton.addEventListener('click', (event) => {
-  event.preventDefault();
+  event.preventDefault(); // 기본 동작 방지
 
-  // get the username and password fields
+// 사용자 이름과 비밀번호 필드 가져오기
   const usernameField = document.getElementById('username');
   const passwordField = document.getElementById('password');
 
-  // get the username and password values
+// 사용자 이름과 비밀번호 값 가져오기
   const username = usernameField.value;
   const password = passwordField.value;
 
-  // send a request to the server to check the login credentials
-  // assuming the server returns a success response with a status code of 200
-  // we will hide the login form and show the logout form and the data table
+// 서버에 로그인 자격 증명을 확인하는 요청 보내기
+// 서버가 200 상태 코드를 포함한 성공적인 응답을 반환한다고 가정하면,
+// 우리는 로그인 폼을 숨기고 로그아웃 폼과 데이터 테이블을 보여줄 것입니다.
   if (username === 'admin' && password === 'password') {
-    sessionStorage.setItem('loggedIn', true); // save login status in session storage
+    sessionStorage.setItem('loggedIn', true); //로그인 상태를 세션 스토리지에 저장
     loginForm.style.display = 'none';
     logoutForm.style.display = 'block';
     dataTable.style.display = 'block';
-    dataTable.style.margin = "0 auto"; // center align the table
+    dataTable.style.margin = "0 auto"; 
   } else {
     alert('Invalid username or password.');
   }
 });
 
-// add a click event listener to the logout button
+// 로그아웃 버튼에 클릭 이벤트 리스너 추가
 logoutButton.addEventListener('click', (event) => {
   event.preventDefault();
 
-  // hide the logout form and the data table, and show the login form
+ // 로그아웃 폼과 데이터 테이블 숨기기, 로그인 폼 보이기
   sessionStorage.removeItem('loggedIn'); // remove login status from session storage
   logoutForm.style.display = 'none';
   dataTable.style.display = 'none';
   loginForm.style.display = 'block';
 
-  // reset the username and password fields
+// 사용자 이름과 비밀번호 필드 재설정
   const usernameField = document.getElementById('username');
   const passwordField = document.getElementById('password');
   usernameField.value = '';
   passwordField.value = '';
 });
 
-// check login status when the page loads
+// 페이지 로드 시 로그인 상태 확인
 window.addEventListener('load', (event) => {
   const loggedIn = sessionStorage.getItem('loggedIn');
   if (loggedIn === 'true') {
@@ -185,16 +185,16 @@ window.addEventListener('load', (event) => {
   }
 });
 
-// add a click event listener to the data table
+// 클릭 이벤트 리스너를 데이터 테이블에 추가
 dataTable.addEventListener('click', (event) => {
   const loggedIn = sessionStorage.getItem('loggedIn');
-  if (loggedIn !== 'true') { // check login status
-    alert('Please log in to modify the data.'); // show alert if not logged in
-    event.preventDefault(); // prevent default behavior of the click event
+  if (loggedIn !== 'true') { // 로그인 상태 체크
+    alert('Please log in to modify the data.'); 
+    event.preventDefault(); // 기본 동작 방지
   }
 });
 
-// add a click event listener to the login form, to reset the fields on each login attempt
+// 클릭 이벤트 리스너를 로그인 양식에 추가하여 로그인을 시도할 때마다 필드를 재설정합니다
 loginForm.addEventListener('click', (event) => {
   const usernameField = document.getElementById('username');
   const passwordField = document.getElementById('password');
