@@ -77,3 +77,10 @@ body.dark-mode {
 	cursor: pointer;
   }
   
+ item-search input {
+	
+	margin-left: 10px;
+	border: 2px solid #1E90FF;
+	border-radius: 5px;
+	padding: 5px;
+  }
