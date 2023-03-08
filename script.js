@@ -202,25 +202,3 @@ loginForm.addEventListener('click', (event) => {
   passwordField.value = '';
 });
 
-
-// Get the input element and table
-let searchInput = document.getElementById('search-input');
-let table = document.getElementById('inventory');
-
-// Add an event listener to the search input
-searchInput.addEventListener('keyup', function() {
-  let searchTerm = searchInput.value.toLowerCase();
-
-  // Loop through each row in the table
-  for (let i = 1; i < table.rows.length; i++) {
-    let row = table.rows[i];
-    let itemName = row.cells[0].textContent.toLowerCase();
-
-    // If the item name matches the search term, show the row
-    if (itemName.includes(searchTerm)) {
-      row.style.display = '';
-    } else {
-      row.style.display = 'none';
-    }
-  }
-});
