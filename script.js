@@ -202,3 +202,6 @@ loginForm.addEventListener('click', (event) => {
   passwordField.value = '';
 });
 
+// 테이블 모양 수정
+// 내역 기능 정상화
+// 새 기능 추가 (필요시)
