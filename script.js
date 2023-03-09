@@ -205,3 +205,4 @@ loginForm.addEventListener('click', (event) => {
 // 테이블 모양 수정
 // 내역 기능 정상화
 // 새 기능 추가 (필요시)
+// 기존 코드 정리
