@@ -208,3 +208,5 @@ loginForm.addEventListener('click', (event) => {
 // 기존 코드 정리
 // 로그아웃 시 테이블 표시 안함 기능
 // 아이템 검색 기능 추가 (검색창 및 중복 제거)
+// 이벤트 리스너 정리
+// Javascript deep dive 참고해서 문법 오류 수정
