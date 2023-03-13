@@ -210,3 +210,5 @@ loginForm.addEventListener('click', (event) => {
 // 아이템 검색 기능 추가 (검색창 및 중복 제거)
 // 이벤트 리스너 정리
 // Javascript deep dive 참고해서 문법 오류 수정
+// id 별 데이터 테이블 서버저장
+// 보안상 안전한 로그인 시스템 구현
