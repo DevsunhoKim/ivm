@@ -212,3 +212,4 @@ loginForm.addEventListener('click', (event) => {
 // Javascript deep dive 참고해서 문법 오류 수정
 // id 별 데이터 테이블 서버저장
 // 보안상 안전한 로그인 시스템 구현
+// 데이터 처리방식 구현
