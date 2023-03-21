@@ -182,6 +182,7 @@ window.addEventListener('load', (event) => {
     dataTable.style.margin = "0 auto"; // center align the table
   } else {
     loginForm.style.display = 'block';
+    dataTable.style.display = 'none'; // hide the data table if not logged in
   }
 });
 
