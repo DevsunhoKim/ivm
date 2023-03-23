@@ -215,52 +215,6 @@ loginForm.addEventListener('click', (event) => {
 // 보안상 안전한 로그인 시스템 구현
 // 데이터 처리방식 구현
 
-/*<?php
-session_start();
-if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    header("location: welcome.php");
-    exit;
-}
-require_once "config.php";
-$username = $password = "";
-$username_err = $password_err = "";
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-    if(empty(trim($_POST["username"]))){
-        $username_err = "Please enter username.";
-    } else{
-        $username = trim($_POST["username"]);
-    }
-    if(empty(trim($_POST["password"]))){
-        $password_err = "Please enter your password.";
-    } else{
-        $password = trim($_POST["password"]);
-    }
-    if(empty($username_err) && empty($password_err)){
-        $sql = "SELECT id, username, password FROM users WHERE username = ?";
-        if($stmt = mysqli_prepare($link, $sql)){
-            mysqli_stmt_bind_param($stmt, "s", $param_username);
-            $param_username = $username;
-            if(mysqli_stmt_execute($stmt)){
-                mysqli_stmt_store_result($stmt);
-                if(mysqli_stmt_num_rows($stmt) == 1){
-                    mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password);
-                    if(mysqli_stmt_fetch($stmt)){
-                        if(password_verify($password, $hashed_password)){
-                            session_start();
-                            $_SESSION["loggedin"] = true;
-                            $_SESSION["id"] = $id;
-                            $_SESSION["username"] = $username;
-                            header("location: welcome.php");
-                        } else{
-                            $password_err = "The password you entered was not valid.";
-                        }
-                    }
-                } else{
-                    $username_err = "No account found with that username.";
-                }
-            } else{
-                echo "
-*/
 
 /*인증 및 승인: 웹페이지는 인벤토리 데이터에 대한 액세스 권한을 부여하기 전에 사용자가 자신을 인증하도록 요구해야 합니다. 또한 웹 페이지는 역할 기반 액세스 제어를 구현하여 인증된 사용자만 인벤토리에서 특정 작업을 수행할 수 있도록 해야 합니다.
 암호화: 사용자 자격 증명 및 인벤토리 데이터와 같은 민감한 데이터는 무단 액세스를 방지하기 위해 강력한 암호화 알고리즘을 사용하여 암호화해야 합니다.
@@ -283,3 +237,5 @@ SQL 쿼리 작성: SQL(Structured Query Language)을 사용하여 데이터베�
 이러한 단계를 따르면 DBMS를 웹 페이지에 성공적으로 적용하고 동적 데이터 기반 웹 애플리케이션을 만들 수 있습니다.
 
 */
+
+/* 데이터 테이블 sql로 옮기기*/
