@@ -238,4 +238,4 @@ SQL 쿼리 작성: SQL(Structured Query Language)을 사용하여 데이터베�
 
 */
 
-/* 데이터 테이블 sql로 옮기기*/
+/* 데이터 테이블 sql로 옮기기 11*/
