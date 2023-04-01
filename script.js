@@ -244,3 +244,4 @@ SQL 쿼리 작성: SQL(Structured Query Language)을 사용하여 데이터베�
 /* */
 /* */
 /* */
+// 오라클 모델 불러오기 실패
