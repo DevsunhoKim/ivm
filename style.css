@@ -85,6 +85,12 @@ body.dark-mode {
 	padding: 5px;
   }
 
+#inventory {
+	margin-left: 10px;
+	border: 2px solid #1E90FF;
+	border-radius: 5px;
+	padding: 5px;
+}
 /* 검색창 재대로 구현 
 각 html 요소 자리 배치 필요
 아이콘 이미지화
