@@ -235,3 +235,11 @@ Oracle 연결 만들기: Oracle 데이터베이스에 연결하려면 Oracle Ins
 
 /* 데이터 테이블 sql로 옮기기 11*/
 // 오라클 모델 불러오기 실패
+
+/*Python과 JavaScript를 연결하는 방법에는 여러 가지가 있습니다.
+
+웹 API 사용: Flask 또는 Django와 같은 프레임워크를 사용하여 Python에서 웹 API를 만든 다음 JavaScript를 사용하여 XMLHttpRequest 개체 또는 가져오기 API를 사용하여 이 API에 요청을 보낼 수 있습니다. 그런 다음 API는 JavaScript에서 쉽게 사용할 수 있는 JSON 형식으로 데이터를 반환할 수 있습니다.
+Python-to-JavaScript 컴파일러 사용: Pyodide 및 Transcrypt와 같은 도구를 사용하면 JavaScript로 컴파일할 수 있는 Python 코드를 작성할 수 있어 브라우저에서 Python 코드를 실행할 수 있습니다.
+Node.js 사용: Node.js와 함께 서버 측에서 JavaScript를 사용하는 경우 하위 프로세스 또는 spawn을 사용하여 Python 스크립트를 실행하고 두 언어 간에 데이터를 전달할 수 있습니다.
+Jupyter 노트북 사용: Jupyter 노트북을 사용하면 동일한 노트북에서 Python과 JavaScript 코드를 혼합할 수 있습니다. Python을 사용하여 데이터를 조작하고 시각화를 생성하고 JavaScript를 사용하여 대화형 사용자 인터페이스를 만들 수 있습니다.
+전반적으로 접근 방식의 선택은 특정 사용 사례 및 요구 사항에 따라 다릅니다. */
